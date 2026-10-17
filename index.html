@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Veltrix — Digital & Creative Studio</title>
+  <!-- Favicon otomatis membaca logo.png -->
+  <link rel="icon" type="image/png" href="./logo.png" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Plus Jakarta Sans & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Space Grotesk"', 'sans-serif'],
+          },
+          colors: {
+            veltrix: {
+              bg: '#040711',
+              card: '#0A1022',
+              border: '#162345',
+              cyan: '#00F0FF',
+              blue: '#0066FF',
+              deep: '#0038A8'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #040711;
+      color: #F8FAFC;
+      overflow-x: hidden;
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #040711;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #162345;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00B4FF;
+    }
+    /* Veltrix Electric Glow */
+    .veltrix-glow {
+      background: radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.16), rgba(0, 102, 255, 0.08) 45%, transparent 75%);
+    }
+    .glass-card {
+      background: rgba(10, 16, 34, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(0, 240, 255, 0.12);
+    }
+    .glass-card:hover {
+      border-color: rgba(0, 240, 255, 0.45);
+      box-shadow: 0 12px 35px -10px rgba(0, 195, 255, 0.22);
+    }
+    .veltrix-logo-glow {
+      filter: drop-shadow(0 0 14px rgba(0, 240, 255, 0.45));
+    }
+    @keyframes pulse-bolt {
+      0%, 100% { filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.45)); }
+      50% { filter: drop-shadow(0 0 24px rgba(0, 240, 255, 0.85)); }
+    }
+    .animate-bolt {
+      animation: pulse-bolt 3s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-cyan-400 selection:text-slate-950">
+
+  <!-- Hidden Reusable Fallback SVG Template -->
+  <template id="veltrix-svg-fallback-template">
+    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full p-1">
+      <defs>
+        <linearGradient id="v-left-fb" x1="15" y1="25" x2="65" y2="100" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#00C6FF"/>
+          <stop offset="50%" stop-color="#0066FF"/>
+          <stop offset="100%" stop-color="#00F0FF"/>
+        </linearGradient>
+        <linearGradient id="v-bolt-fb" x1="75" y1="12" x2="42" y2="108" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#70FFFF"/>
+          <stop offset="45%" stop-color="#00F0FF"/>
+          <stop offset="100%" stop-color="#0088FF"/>
+        </linearGradient>
+      </defs>
+      <path d="M16 36 C13 29 18 24 26 24 H37 C42 24 46 27 48 32 L58 54 L41 68 L52 68 L45 92 L16 36 Z" fill="url(#v-left-fb)"/>
+      <path d="M104 36 C107 29 102 24 94 24 H84 C79 24 75 27 72 32 L64 46 L86 46 L50 100 C54 103 63 102 68 94 L104 36 Z" fill="url(#v-bolt-fb)"/>
+      <path d="M72 14 L38 63 H60 L45 106 L88 53 H64 L72 14 Z" fill="url(#v-bolt-fb)"/>
+    </svg>
+  </template>
+
+  <!-- Main Sticky Navbar -->
+  <header class="sticky top-0 z-40 backdrop-blur-xl bg-[#040711]/85 border-b border-cyan-500/15">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- 1. LOGO DI NAVBAR -->
+      <a href="#" class="flex items-center gap-3.5 group">
+        <div class="relative w-11 h-11 rounded-xl bg-[#070B19] border border-cyan-500/40 flex items-center justify-center shadow-lg shadow-cyan-500/15 group-hover:border-cyan-400 transition-all overflow-hidden">
+          <img 
+            src="./logo.png" 
+            alt="Veltrix Logo" 
+            class="veltrix-logo-img w-9 h-9 object-contain veltrix-logo-glow transition-transform duration-300 group-hover:scale-110"
+            onerror="handleLogoError(this)"
+          />
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="font-display font-bold text-2xl tracking-wider text-white">VELTRIX</span>
+            <span class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_10px_#00F0FF]"></span>
+          </div>
+          <span class="block text-[10px] uppercase tracking-[0.25em] text-cyan-400 font-semibold -mt-1">Digital Studio</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#katalog" class="hover:text-cyan-400 transition-colors">Katalog Jasa</a>
+        <a href="#keunggulan" class="hover:text-cyan-400 transition-colors">Keunggulan</a>
+        <a href="#cara-order" class="hover:text-cyan-400 transition-colors">Alur Order</a>
+        <a href="#testimoni" class="hover:text-cyan-400 transition-colors">Testimoni</a>
+      </nav>
+
+      <!-- Cart & CTA -->
+      <div class="flex items-center gap-3">
+        <button onclick="toggleCart(true)" class="relative flex items-center gap-2.5 bg-slate-900/90 hover:bg-slate-800 border border-cyan-500/30 px-4 py-2.5 rounded-xl text-sm font-semibold text-white transition-all shadow-lg shadow-cyan-950/30">
+          <i data-lucide="shopping-bag" class="w-4 h-4 text-cyan-400"></i>
+          <span class="hidden sm:inline">Keranjang Proyek</span>
+          <span id="cartCountBadge" class="bg-gradient-to-r from-blue-600 to-cyan-400 text-slate-950 text-xs font-extrabold px-2 py-0.5 rounded-full">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative pt-12 pb-20 md:pt-20 md:pb-28 veltrix-glow overflow-hidden">
+    <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-1/3 -right-24 w-96 h-96 bg-cyan-400/15 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center max-w-4xl mx-auto">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs sm:text-sm font-semibold mb-6">
+          <i data-lucide="zap" class="w-4 h-4 text-cyan-400 fill-cyan-400"></i>
+          <span>Veltrix Studio — Eksekusi Cepat, Desain Modern & Kode Rapi</span>
+        </div>
+
+        <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.08] mb-6">
+          Ubah Ide Digitalmu Jadi <br class="hidden sm:inline" />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-teal-200 drop-shadow-[0_0_25px_rgba(0,240,255,0.25)]">
+            Karya Berkelas Tinggi.
+          </span>
+        </h1>
+
+        <p class="text-slate-300/90 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+          Solusi *all-in-one* bersama **Veltrix**: mulai dari pembuatan **Website Modern**, **Bot WhatsApp Pintar 24/7**, **Editing Video & Foto**, hingga **Desain Poster, ID Card & Branding** siap pakai.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#katalog" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-blue-600 via-cyan-500 to-cyan-400 hover:from-blue-500 hover:to-cyan-300 text-slate-950 font-extrabold px-8 py-4 rounded-2xl shadow-xl shadow-cyan-500/25 transition-all transform hover:-translate-y-0.5">
+            <span>Eksplor Layanan Veltrix</span>
+            <i data-lucide="arrow-down-right" class="w-5 h-5"></i>
+          </a>
+          <button onclick="openCustomConsult()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-slate-900/90 hover:bg-slate-800/90 text-white font-semibold px-7 py-4 rounded-2xl border border-cyan-500/30 transition-all">
+            <i data-lucide="message-circle" class="w-5 h-5 text-cyan-400"></i>
+            <span>Konsultasi Custom Gratis</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Hero Visual Showcase Strip -->
+      <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div onclick="filterCategory('web'); document.getElementById('katalog').scrollIntoView({behavior:'smooth'})" class="cursor-pointer glass-card p-5 rounded-2xl transition-all group">
+          <div class="w-11 h-11 rounded-xl bg-blue-500/15 border border-blue-400/30 flex items-center justify-center text-cyan-400 mb-3 group-hover:scale-110 transition-transform">
+            <i data-lucide="code-2" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-white text-sm sm:text-base">Web Development</h3>
+          <p class="text-xs text-slate-400 mt-1">Landing Page, Toko Online & Custom Web App</p>
+        </div>
+
+        <div onclick="filterCategory('bot'); document.getElementById('katalog').scrollIntoView({behavior:'smooth'})" class="cursor-pointer glass-card p-5 rounded-2xl transition-all group">
+          <div class="w-11 h-11 rounded-xl bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center text-cyan-300 mb-3 group-hover:scale-110 transition-transform">
+            <i data-lucide="bot" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-white text-sm sm:text-base">WhatsApp Bot</h3>
+          <p class="text-xs text-slate-400 mt-1">Auto-Reply CS, Jaga Grup & Integrasi AI</p>
+        </div>
+
+        <!-- 2. LOGO DI KARTU EMBLEM TENGAH HERO -->
+        <div class="glass-card p-5 rounded-2xl flex flex-col items-center justify-center text-center border-cyan-400/40 bg-gradient-to-b from-cyan-950/30 to-slate-950/80 relative overflow-hidden">
+          <div class="w-16 h-16 flex items-center justify-center mb-1 animate-bolt">
+            <img 
+              src="./logo.png" 
+              alt="Veltrix Logo" 
+              class="veltrix-logo-img w-16 h-16 object-contain veltrix-logo-glow"
+              onerror="handleLogoError(this)"
+            />
+          </div>
+          <span class="font-display font-bold text-sm tracking-widest text-cyan-300">VELTRIX CORE</span>
+          <span class="text-[11px] text-slate-400">Lightning Fast Digital Studio</span>
+        </div>
+
+        <div onclick="filterCategory('desain'); document.getElementById('katalog').scrollIntoView({behavior:'smooth'})" class="cursor-pointer glass-card p-5 rounded-2xl transition-all group">
+          <div class="w-11 h-11 rounded-xl bg-indigo-500/15 border border-indigo-400/30 flex items-center justify-center text-indigo-300 mb-3 group-hover:scale-110 transition-transform">
+            <i data-lucide="palette" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-white text-sm sm:text-base">Poster & Desain Grafis</h3>
+          <p class="text-xs text-slate-400 mt-1">Poster Promosi, Event, ID Card & Banner</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Catalog Section -->
+  <section id="katalog" class="py-16 md:py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+        <div>
+          <span class="text-cyan-400 font-bold text-xs uppercase tracking-widest">Katalog Layanan Veltrix</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-2">Pilih Paket Sesuai Kebutuhanmu</h2>
+        </div>
+        <p class="text-slate-400 text-sm max-w-md">
+          Bisa pesan satuan atau gabungkan beberapa layanan sekaligus di keranjang proyekmu untuk sekali *checkout* ke WhatsApp.
+        </p>
+      </div>
+
+      <!-- Category Filter Tabs (Dinamis berdasarkan layanan aktif) -->
+      <div id="categoryTabsContainer" class="flex items-center gap-2 overflow-x-auto pb-4 mb-8"></div>
+
+      <!-- Services Grid -->
+      <div id="servicesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- Keunggulan Section -->
+  <section id="keunggulan" class="py-16 bg-slate-900/35 border-y border-cyan-500/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-cyan-400 font-bold text-xs uppercase tracking-widest">Kenapa Pilih Veltrix?</span>
+        <h2 class="font-display text-3xl font-bold text-white mt-2">Kualitas Agensi, Harga Bersahabat</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/15 border border-cyan-400/25 text-cyan-400 flex items-center justify-center mb-4">
+            <i data-lucide="zap" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-white text-lg mb-2">Opsi Booster Kilat</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Butuh proyek selesai lebih cepat dari jadwal normal? Tersedia opsi Fast Track & Express di keranjang.</p>
+        </div>
+
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-400/25 text-blue-400 flex items-center justify-center mb-4">
+            <i data-lucide="refresh-cw" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-white text-lg mb-2">Garansi Revisi</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Kurang sreg sama warna atau tata letak? Tenang, setiap paket sudah termasuk jatah revisi gratis.</p>
+        </div>
+
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="w-12 h-12 rounded-xl bg-teal-500/15 border border-teal-400/25 text-teal-300 flex items-center justify-center mb-4">
+            <i data-lucide="smartphone" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-white text-lg mb-2">Modern & Responsif</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Website tampil mulus di HP & Laptop, bot WA stabil 24/7, dan visual mengikuti tren terkini.</p>
+        </div>
+
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="w-12 h-12 rounded-xl bg-indigo-500/15 border border-indigo-400/25 text-indigo-300 flex items-center justify-center mb-4">
+            <i data-lucide="wallet" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-white text-lg mb-2">Harga Transparan</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Estimasi biaya paket beserta kalkulasi booster deadline langsung terlihat jelas di keranjang.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Alur Order Section -->
+  <section id="cara-order" class="py-16 md:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-cyan-400 font-bold text-xs uppercase tracking-widest">Mudah & Praktis</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-2">4 Langkah Order di Veltrix</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="relative glass-card p-6 rounded-2xl">
+          <span class="font-display text-4xl font-bold text-cyan-400/25">01</span>
+          <h3 class="font-bold text-white text-lg mt-2 mb-2">Pilih Layanan</h3>
+          <p class="text-slate-400 text-sm">Masukkan paket website, bot WA, atau desain poster/ID card yang kamu inginkan ke keranjang.</p>
+        </div>
+        <div class="relative glass-card p-6 rounded-2xl">
+          <span class="font-display text-4xl font-bold text-cyan-400/25">02</span>
+          <h3 class="font-bold text-white text-lg mt-2 mb-2">Pilih Kecepatan & Brief</h3>
+          <p class="text-slate-400 text-sm">Atur target kecepatan pengerjaan (Normal / Booster Express) dan tulis konsep singkatmu.</p>
+        </div>
+        <div class="relative glass-card p-6 rounded-2xl">
+          <span class="font-display text-4xl font-bold text-cyan-400/25">03</span>
+          <h3 class="font-bold text-white text-lg mt-2 mb-2">Kirim ke WhatsApp</h3>
+          <p class="text-slate-400 text-sm">Klik tombol Checkout dan rincian pesananmu otomatis terkirim rapi ke WhatsApp Admin Veltrix.</p>
+        </div>
+        <div class="relative glass-card p-6 rounded-2xl">
+          <span class="font-display text-4xl font-bold text-cyan-400/25">04</span>
+          <h3 class="font-bold text-white text-lg mt-2 mb-2">Eksekusi & Serah Terima</h3>
+          <p class="text-slate-400 text-sm">Proyek dikerjakan, direvisi jika perlu, dan file akhir / link deploy langsung dikirimkan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimoni Section -->
+  <section id="testimoni" class="py-16 bg-slate-900/30 border-t border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-cyan-400 font-bold text-xs uppercase tracking-widest">Kata Klien Kami</span>
+        <h2 class="font-display text-3xl font-bold text-white mt-2">Dipercaya Pelajar, Kreator & UMKM</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+          <div>
+            <div class="flex text-amber-400 mb-3 text-sm">★★★★★</div>
+            <p class="text-slate-300 text-sm italic leading-relaxed">"Pesan website katalog + poster promosi donat di Veltrix hasilnya cakep banget! Tampilannya modern dan pembeli bisa langsung order ke WA."</p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-slate-800/80 flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-cyan-500/20 text-cyan-300 font-bold flex items-center justify-center text-sm">R</div>
+            <div>
+              <h4 class="text-white font-semibold text-sm">Raka Pratama</h4>
+              <p class="text-xs text-slate-400">Owner Bisnis Kuliner</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+          <div>
+            <div class="flex text-amber-400 mb-3 text-sm">★★★★★</div>
+            <p class="text-slate-300 text-sm italic leading-relaxed">"Bot WhatsApp buat auto-reply toko sama jaga grup komunitas jalan lancar 24 jam. Adminnya juga ramah banget pas bantuin setting awal."</p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-slate-800/80 flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-blue-500/20 text-blue-300 font-bold flex items-center justify-center text-sm">D</div>
+            <div>
+              <h4 class="text-white font-semibold text-sm">Dinda Amelia</h4>
+              <p class="text-xs text-slate-400">Admin Komunitas & Olshop</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+          <div>
+            <div class="flex text-amber-400 mb-3 text-sm">★★★★★</div>
+            <p class="text-slate-300 text-sm italic leading-relaxed">"Pesan desain ID Card panitia sekolah + web profil QR Code selesai tepat waktu. Desainnya keren dan harganya ramah banget di kantong pelajar!"</p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-slate-800/80 flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-sky-500/20 text-sky-300 font-bold flex items-center justify-center text-sm">F</div>
+            <div>
+              <h4 class="text-white font-semibold text-sm">Fajar Nugroho</h4>
+              <p class="text-xs text-slate-400">Koordinator Event Sekolah</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 border-t border-cyan-500/15 bg-[#02040A]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      
+      <!-- 3. LOGO DI FOOTER -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-[#070B19] border border-cyan-500/40 flex items-center justify-center overflow-hidden">
+          <img 
+            src="./logo.png" 
+            alt="Veltrix Logo" 
+            class="veltrix-logo-img w-8 h-8 object-contain"
+            onerror="handleLogoError(this)"
+          />
+        </div>
+        <div>
+          <span class="font-display font-bold text-white tracking-wider">VELTRIX STUDIO</span>
+          <p class="text-xs text-slate-500">Web Development • WhatsApp Bot • Graphic Design</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <p class="text-xs text-slate-500">© 2026 Veltrix Digital Studio. All rights reserved.</p>
+        <button onclick="openAdminAccess()" title="Panel Pengelola" class="inline-flex items-center gap-1.5 text-[11px] text-slate-600 hover:text-cyan-400 transition-colors px-2.5 py-1 rounded-lg border border-transparent hover:border-slate-800">
+          <i data-lucide="lock" class="w-3 h-3"></i>
+          <span>Admin</span>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Mobile Cart Bar -->
+  <div id="floatingCartBar" class="fixed bottom-5 inset-x-4 z-30 md:hidden hidden">
+    <button onclick="toggleCart(true)" class="w-full bg-gradient-to-r from-blue-600 via-cyan-500 to-cyan-400 text-slate-950 font-extrabold p-4 rounded-2xl shadow-2xl shadow-cyan-500/30 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span id="mobileCartCount" class="bg-slate-950 text-cyan-300 text-xs font-extrabold px-2.5 py-1 rounded-lg">0 Item</span>
+        <span class="text-sm">Lihat Keranjang Proyek</span>
+      </div>
+      <span id="mobileCartTotal" class="font-display font-bold text-sm">Rp 0</span>
+    </button>
+  </div>
+
+  <!-- Slide-over Project Cart Drawer -->
+  <div id="cartDrawerBackdrop" onclick="toggleCart(false)" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"></div>
+  
+  <aside id="cartDrawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-[#070C1B] border-l border-cyan-500/20 z-50 translate-x-full transition-transform duration-300 flex flex-col">
+    <div class="p-5 border-b border-slate-800 flex items-center justify-between shrink-0">
+      <div class="flex items-center gap-3">
+        <!-- 4. LOGO DI DRAWER KERANJANG -->
+        <div class="w-9 h-9 rounded-xl bg-[#040711] border border-cyan-500/40 flex items-center justify-center overflow-hidden">
+          <img 
+            src="./logo.png" 
+            alt="Veltrix Logo" 
+            class="veltrix-logo-img w-7 h-7 object-contain"
+            onerror="handleLogoError(this)"
+          />
+        </div>
+        <div>
+          <h3 class="font-display font-bold text-lg text-white">Ringkasan Proyek</h3>
+          <p class="text-xs text-slate-400">Veltrix Instant WhatsApp Checkout</p>
+        </div>
+      </div>
+      <button onclick="toggleCart(false)" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <div class="flex-1 min-h-0 overflow-y-auto p-5 space-y-6">
+      <div id="cartItemsContainer" class="space-y-3"></div>
+
+      <div id="briefFormSection" class="space-y-4 pt-4 border-t border-slate-800/80 hidden">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-cyan-400">Detail Pemesan & Booster Deadline</h4>
+        
+        <div>
+          <label class="block text-xs text-slate-300 mb-1.5 font-medium">Nama Kamu / Brand *</label>
+          <input id="clientName" type="text" placeholder="Contoh: Budi / Toko Kopi Senja" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400" />
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <label class="block text-xs text-slate-300 font-medium">Kecepatan Pengerjaan (Booster)</label>
+            <span class="text-[10px] font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-md border border-cyan-500/20">Otomatis Hitung</span>
+          </div>
+          <select id="clientDeadline" onchange="updateCartUI()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400">
+            <!-- Di-render dinamis sesuai setting booster admin -->
+          </select>
+          <p class="text-[11px] text-slate-400 mt-1.5">
+            Pilih <span class="text-cyan-300 font-semibold">Fast Track</span> atau <span class="text-cyan-300 font-semibold">Super Express</span> jika ingin antrean proyekmu diprioritaskan selesai lebih cepat.
+          </p>
+        </div>
+
+        <div>
+          <label class="block text-xs text-slate-300 mb-1.5 font-medium">Catatan Konsep / Request Khusus</label>
+          <textarea id="clientNotes" rows="3" placeholder="Ceritakan singkat konsep web, fitur bot WA, atau ukuran desain yang diinginkan..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-5 border-t border-slate-800 bg-slate-950/90 space-y-3 shrink-0">
+      <div id="priceBreakdown" class="space-y-1.5 text-xs border-b border-slate-800/80 pb-3 hidden">
+        <div class="flex items-center justify-between text-slate-400">
+          <span>Subtotal Paket</span>
+          <span id="cartSubtotalPrice" class="font-medium text-slate-200">Rp 0</span>
+        </div>
+        <div id="boosterRow" class="flex items-center justify-between text-cyan-300 hidden">
+          <span id="boosterLabelText">⚡ Biaya Booster Deadline</span>
+          <span id="cartBoosterPrice" class="font-bold">+ Rp 0</span>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <span class="text-sm text-slate-300 font-semibold">Estimasi Total Biaya</span>
+        <span id="cartTotalPrice" class="font-display font-bold text-xl text-cyan-400">Rp 0</span>
+      </div>
+
+      <button onclick="checkoutWhatsApp()" id="checkoutBtn" disabled class="w-full py-3.5 px-6 rounded-xl font-extrabold text-sm flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 via-cyan-500 to-cyan-400 hover:from-blue-500 hover:to-cyan-300 disabled:opacity-40 disabled:cursor-not-allowed text-slate-950 transition-all shadow-lg shadow-cyan-500/20">
+        <i data-lucide="send" class="w-4 h-4"></i>
+        <span>Pesan Sekarang via WhatsApp</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ======================================================================= -->
+  <!-- MODAL 1: LOGIN ADMIN (BERSIH TANPA BOCORAN PIN DEFAULT)                 -->
+  <!-- ======================================================================= -->
+  <div id="adminLoginModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+    <div class="bg-[#080E20] border border-cyan-500/30 rounded-2xl max-w-sm w-full p-6 shadow-2xl">
+      <div class="flex items-center justify-between mb-5">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center text-cyan-400">
+            <i data-lucide="shield-check" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-display font-bold text-white text-lg">Login Admin Veltrix</h3>
+            <p class="text-xs text-slate-400">Akses Khusus Pengelola Studio</p>
+          </div>
+        </div>
+        <button onclick="closeAdminLogin()" class="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-slate-800/80">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs text-slate-300 mb-1.5 font-medium">Masukkan PIN / Password Admin</label>
+          <input id="adminPinInput" type="password" required placeholder="••••••••••••" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400" />
+        </div>
+        <p id="loginErrorMsg" class="text-xs text-rose-400 hidden">PIN yang dimasukkan tidak sesuai!</p>
+        <button type="submit" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-400 text-slate-950 font-extrabold text-sm hover:opacity-95 transition-all shadow-lg shadow-cyan-500/20">
+          Masuk ke Panel Admin
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================================================================= -->
+  <!-- MODAL 2: DASHBOARD ADMIN PANEL (SUDAH DIPERBAIKI TIDAK KEPOTONG)        -->
+  <!-- ======================================================================= -->
+  <div id="adminDashboardModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden items-center justify-center p-2 sm:p-4">
+    <div class="bg-[#070C1B] border border-cyan-500/30 rounded-2xl max-w-5xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
+      
+      <!-- Modal Header (shrink-0 agar tidak pernah tertekan) -->
+      <div class="p-4 sm:p-6 border-b border-slate-800 flex items-center justify-between gap-4 bg-[#040711] shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center text-cyan-400 shrink-0">
+            <i data-lucide="sliders" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex flex-wrap items-center gap-2">
+              <h3 class="font-display font-bold text-lg sm:text-xl text-white">Veltrix Admin Panel</h3>
+              <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">Live Editor</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-0.5">Ubah harga, estimasi waktu, aktifkan layanan, & atur persentase booster secara langsung.</p>
+          </div>
+        </div>
+        <button onclick="closeAdminDashboard()" class="p-2 rounded-xl bg-slate-900 text-slate-400 hover:text-white border border-slate-800 shrink-0">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Modal Tabs Navigation (shrink-0 & py-3 agar utuh dan tidak kepotong!) -->
+      <div class="px-4 sm:px-6 py-3 bg-[#050914] border-b border-slate-800 flex items-center gap-2 overflow-x-auto shrink-0">
+        <button onclick="switchAdminTab('services')" id="tabBtn-services" class="admin-tab-btn shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-cyan-500/15 text-cyan-300 border border-cyan-400/40 transition-all">
+          <i data-lucide="package" class="w-4 h-4"></i>
+          <span>1. Kelola Paket, Harga & Estimasi</span>
+        </button>
+        <button onclick="switchAdminTab('settings')" id="tabBtn-settings" class="admin-tab-btn shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900/80 text-slate-400 hover:text-white border border-slate-800 transition-all">
+          <i data-lucide="zap" class="w-4 h-4"></i>
+          <span>2. Booster Deadline, No. WA & PIN</span>
+        </button>
+        <button onclick="switchAdminTab('backup')" id="tabBtn-backup" class="admin-tab-btn shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900/80 text-slate-400 hover:text-white border border-slate-800 transition-all">
+          <i data-lucide="download-cloud" class="w-4 h-4"></i>
+          <span>3. Download / Backup Data</span>
+        </button>
+      </div>
+
+      <!-- Modal Body (flex-1 min-h-0 overflow-y-auto agar scroll mulus tanpa mendorong header) -->
+      <div class="flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 space-y-6">
+        
+        <!-- TAB 1: KELOLA PAKET, HARGA & ESTIMASI -->
+        <div id="adminTab-services" class="space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-900/60 border border-slate-800 p-4 rounded-xl">
+            <p class="text-xs text-slate-300">
+              💡 <strong>Tips:</strong> Ubah angka <strong>Harga (Rp)</strong> atau <strong>Estimasi Waktu</strong>, lalu klik tombol <strong>Simpan Semua Perubahan</strong> di kanan bawah. Klik tombol <strong>Aktif / Nonaktif</strong> untuk menampilkan atau menyembunyikan paket.
+            </p>
+            <button onclick="addNewServiceRow()" class="shrink-0 inline-flex items-center gap-1.5 bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-400/30 px-3.5 py-2 rounded-xl text-xs font-bold transition-all">
+              <i data-lucide="plus-circle" class="w-4 h-4"></i>
+              <span>Tambah Paket Baru</span>
+            </button>
+          </div>
+
+          <div id="adminServicesList" class="space-y-3"></div>
+        </div>
+
+        <!-- TAB 2: BOOSTER DEADLINE, NO WA & PIN -->
+        <div id="adminTab-settings" class="hidden space-y-6 max-w-xl">
+          <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 space-y-4">
+            <h4 class="font-display font-bold text-white text-base flex items-center gap-2">
+              <i data-lucide="zap" class="w-4 h-4 text-cyan-400"></i>
+              <span>Pengaturan Persentase Booster Deadline</span>
+            </h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs text-slate-300 mb-1.5 font-medium">Kenaikan Fast Track (%)</label>
+                <input id="settingFastPct" type="number" min="0" max="200" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-cyan-300 font-bold focus:outline-none focus:border-cyan-400" />
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300 mb-1.5 font-medium">Kenaikan Super Express (%)</label>
+                <input id="settingExpressPct" type="number" min="0" max="300" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-cyan-300 font-bold focus:outline-none focus:border-cyan-400" />
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 space-y-4">
+            <h4 class="font-display font-bold text-white text-base flex items-center gap-2">
+              <i data-lucide="phone" class="w-4 h-4 text-cyan-400"></i>
+              <span>Kontak WhatsApp & Keamanan Admin</span>
+            </h4>
+            <div>
+              <label class="block text-xs text-slate-300 mb-1.5 font-medium">Nomor WhatsApp Penerima Order (Format 628...)</label>
+              <input id="settingWhatsapp" type="text" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400" />
+            </div>
+            <div>
+              <label class="block text-xs text-slate-300 mb-1.5 font-medium">PIN / Password Login Admin</label>
+              <input id="settingAdminPin" type="text" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400" />
+              <p class="text-[11px] text-slate-500 mt-1">Ganti PIN ini agar hanya kamu yang tahu akses ke Panel Admin.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: DOWNLOAD FILE HTML TERBARU -->
+        <div id="adminTab-backup" class="hidden space-y-5 max-w-xl">
+          <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 space-y-4">
+            <h4 class="font-display font-bold text-white text-base">Unduh Kode Website dengan Harga Terbaru</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Setelah kamu mengubah harga, durasi, atau mengaktifkan paket di Panel Admin ini, kamu juga bisa mengunduh file <code>index.html</code> yang sudah berisi perubahan terbarumu secara permanen untuk di-upload ke GitHub/Vercel.
+            </p>
+            <div class="flex flex-wrap gap-3 pt-2">
+              <button onclick="downloadUpdatedHtmlFile()" class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-400 text-slate-950 font-extrabold text-xs px-4 py-3 rounded-xl shadow-lg">
+                <i data-lucide="download" class="w-4 h-4"></i>
+                <span>Download index.html (Harga Terbaru)</span>
+              </button>
+              <button onclick="resetToDefaultData()" class="inline-flex items-center gap-2 bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 font-semibold text-xs px-4 py-3 rounded-xl">
+                <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                <span>Reset ke Daftar Awal</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer (shrink-0 agar tetap di bawah) -->
+      <div class="p-4 sm:p-5 border-t border-slate-800 bg-[#040711] flex items-center justify-between gap-4 shrink-0">
+        <span class="text-xs text-slate-400 hidden sm:inline">Pastikan klik Simpan setelah mengubah harga atau durasi.</span>
+        <div class="flex items-center gap-3 ml-auto">
+          <button onclick="closeAdminDashboard()" class="px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white bg-slate-900 border border-slate-800">
+            Tutup
+          </button>
+          <button onclick="saveAdminChanges()" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold bg-gradient-to-r from-blue-600 via-cyan-500 to-cyan-400 text-slate-950 shadow-lg shadow-cyan-500/25 hover:opacity-95 transition-all">
+            <i data-lucide="save" class="w-4 h-4"></i>
+            <span>Simpan Semua Perubahan</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-slate-900 border border-cyan-400/50 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-sm font-medium translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400"></i>
+    <span id="toastMsg">Berhasil disimpan!</span>
+  </div>
+
+  <!-- Application Script -->
+  <script>
+    const STORAGE_KEY = 'veltrix_studio_config_v2';
+
+    // Data Default Awal
+    const DEFAULT_CONFIG = {
+      whatsappNumber: "6282198995676",
+      adminPin: "veltrix123",
+      fastBoosterPct: 25,
+      expressBoosterPct: 50,
+      services: [
+        // 1. WEBSITE (AKTIF)
+        {
+          id: 'web-landing',
+          active: true,
+          category: 'web',
+          categoryLabel: 'Website',
+          title: 'Landing Page Modern & Estetik',
+          price: 105000,
+          duration: '2 - 3 Hari',
+          icon: 'layout',
+          desc: 'Cocok untuk promosi produk, jasa, event sekolah, atau profil bisnis dengan tampilan modern & responsif di HP.',
+          features: ['Desain Modern (HTML + Tailwind / React)', 'Tombol Order Langsung ke WhatsApp', 'Gratis Deploy Vercel / GitHub', '2x Revisi Desain']
+        },
+        {
+          id: 'web-store',
+          active: true,
+          category: 'web',
+          categoryLabel: 'Website',
+          title: 'Website Toko Online + Keranjang WA',
+          price: 150000,
+          duration: '3 - 5 Hari',
+          icon: 'shopping-cart',
+          desc: 'Website katalog jualan interaktif lengkap dengan filter produk, keranjang belanja, dan kalkulasi harga otomatis ke WA.',
+          features: ['Katalog Produk + Filter Kategori', 'Fitur Keranjang & Hitung Total Otomatis', 'Format Order Otomatis Rapi ke WA', '3x Revisi & Panduan Pakai']
+        },
+        {
+          id: 'web-custom',
+          active: true,
+          category: 'web',
+          categoryLabel: 'Website',
+          title: 'Custom Web App / Portofolio Interaktif',
+          price: 175000,
+          duration: '3 - 4 Hari',
+          icon: 'sparkles',
+          desc: 'Website custom sesuai request seperti web profil QR ID Card, web interaktif musik, atau multi-page website.',
+          features: ['Fitur Interaktif Sesuai Request', 'Animasi Halus & Musik Autoplay', 'Integrasi QR Code / Link Custom', 'Source Code Lengkap']
+        },
+
+        // 2. BOT WHATSAPP (AKTIF)
+        {
+          id: 'bot-cs',
+          active: true,
+          category: 'bot',
+          categoryLabel: 'Bot WA',
+          title: 'Bot WA Auto-Reply Customer Service',
+          price: 55000,
+          duration: '1 - 2 Hari',
+          icon: 'message-square-code',
+          desc: 'Balas pesan pelanggan otomatis 24/7 lengkap dengan menu interaktif, katalog harga, dan FAQ bisnis kamu.',
+          features: ['Auto-Reply Menu & Kata Kunci', 'Sambutan Pelanggan Baru Otomatis', 'Mudah Diubah Teks Balasan', 'Panduan Scan & Menjalankan Bot']
+        },
+        {
+          id: 'bot-group',
+          active: true,
+          category: 'bot',
+          categoryLabel: 'Bot WA',
+          title: 'Bot WA Manajemen & Penjaga Grup',
+          price: 62000,
+          duration: '1 - 3 Hari',
+          icon: 'shield-check',
+          desc: 'Jaga ketertiban grup WA otomatis: fitur anti-link promosi, welcome member baru, hidetag, dan pembuatan stiker.',
+          features: ['Anti-Link & Auto Kick Spam', 'Welcome / Goodbye Message Otomatis', 'Fitur Stiker & Tag All Member', 'Stabil & Ringan Digunakan']
+        },
+        {
+          id: 'bot-ai',
+          active: true,
+          category: 'bot',
+          categoryLabel: 'Bot WA',
+          title: 'Bot WA Custom AI & Integrasi Data',
+          price: 175000,
+          duration: '4 - 5 Hari',
+          icon: 'cpu',
+          desc: 'Bot WhatsApp pintar terintegrasi AI asisten atau pencatatan pesanan otomatis langsung masuk ke Google Sheets.',
+          features: ['Integrasi AI Jawab Pertanyaan Luwes', 'Rekap Order Otomatis ke Spreadsheet', 'Notifikasi Admin Real-time', 'Full Support Setup']
+        },
+
+        // 3. DESAIN GRAFIS (AKTIF)
+        {
+          id: 'desain-poster',
+          active: true,
+          category: 'desain',
+          categoryLabel: 'Desain Grafis',
+          title: 'Desain Poster Promosi / Event',
+          price: 35000,
+          duration: '1 - 3 Hari',
+          icon: 'wand-2',
+          desc: 'Poster visual menarik untuk jualan makanan/produk, lomba sekolah, konser, atau pengumuman kegiatan.',
+          features: ['Desain Original & Eye-Catching', 'Ukuran Sesuai Request (IG / Cetak A3)', 'Resolusi Tinggi Siap Cetak / Post', '2x Revisi Gratis']
+        },
+        {
+          id: 'desain-idcard',
+          active: true,
+          category: 'desain',
+          categoryLabel: 'Desain Grafis',
+          title: 'Desain Name Tag / ID Card & Banner',
+          price: 60000,
+          duration: '2 - 3 Hari',
+          icon: 'id-card',
+          desc: 'Desain ID Card panitia/organisasi (B3 / custom), X-Banner, atau spanduk toko dengan ukuran presisi siap cetak.',
+          features: ['Ukuran Presisi (mm/cm) Siap Cetak', 'Bisa Tambah QR Code Kustom', 'Desain Depan & Belakang', 'File PDF/PNG Kualitas Cetak (CMYK/RGB)']
+        },
+
+        // 4. LAYANAN NONAKTIF SEMENTARA (BISA DIAKTIFKAN KAPAN SAJA DARI PANEL ADMIN)
+        {
+          id: 'edit-short',
+          active: false,
+          category: 'editing',
+          categoryLabel: 'Video & Foto',
+          title: 'Edit Video Reels / TikTok / Shorts',
+          price: 75000,
+          duration: '1 - 2 Hari',
+          icon: 'film',
+          desc: 'Editing video vertikal dinamis (maks 60 detik) lengkap dengan subtitle animasi, transisi kekinian, dan musik.',
+          features: ['Dynamic Subtitle / Caption Menarik', 'Transisi Smooth & Sound Effects (SFX)', 'Color Grading Cerah & Tajam', 'Resolusi Full HD 1080p 60fps']
+        },
+        {
+          id: 'edit-long',
+          active: false,
+          category: 'editing',
+          categoryLabel: 'Video & Foto',
+          title: 'Edit Video Sinematik / Tugas / Event',
+          price: 150000,
+          duration: '2 - 3 Hari',
+          icon: 'video',
+          desc: 'Cocok untuk dokumentasi kegiatan sekolah, vlog, video profil organisasi, atau aftermovie event.',
+          features: ['Storytelling Cut & Pacing Rapi', 'Cinematic Color Grading + Backsound', 'Lower Thirds / Judul Animasi', '2x Revisi Minor']
+        },
+        {
+          id: 'edit-photo',
+          active: false,
+          category: 'editing',
+          categoryLabel: 'Video & Foto',
+          title: 'Paket Retouch & Manipulasi Foto (5 Foto)',
+          price: 60000,
+          duration: '1 Hari',
+          icon: 'image-plus',
+          desc: 'Percantik foto produk jualan atau foto profil: hapus/ganti background, koreksi warna, dan penambahan efek visual.',
+          features: ['Hapus / Ganti Background Rapi', 'Color Correction & Sharpening', 'Penyesuaian Cahaya Produk', 'File PNG/JPG Resolusi Tinggi']
+        },
+        {
+          id: 'desain-feed',
+          active: false,
+          category: 'desain',
+          categoryLabel: 'Desain Grafis',
+          title: 'Paket 6 Desain Feed / Story Instagram',
+          price: 180000,
+          duration: '2 - 3 Hari',
+          icon: 'grid',
+          desc: 'Bikin tampilan Instagram bisnis atau organisasi kamu makin rapi, estetik, dan seragam dengan 6 konten sekaligus.',
+          features: ['6 Desain Feed / Carousel / Story', 'Tema Warna & Tipografi Seragam', 'Termasuk Penataan Copywriting', 'File PNG HD + Link Template']
+        }
+      ]
+    };
+
+    let appConfig = loadConfig();
+    let cart = [];
+    let currentCategory = 'all';
+    let isAdminLoggedIn = false;
+
+    function loadConfig() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          return JSON.parse(saved);
+        }
+      } catch (e) {
+        console.warn('Gagal memuat localStorage:', e);
+      }
+      return JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+    }
+
+    function saveConfigToLocal() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appConfig));
+      } catch (e) {
+        console.warn('Gagal menyimpan localStorage:', e);
+      }
+    }
+
+    function handleLogoError(imgElement) {
+      const template = document.getElementById('veltrix-svg-fallback-template');
+      if (template && imgElement.parentNode) {
+        const svgClone = template.content.cloneNode(true);
+        imgElement.style.display = 'none';
+        const existingFallback = imgElement.parentNode.querySelector('.svg-fallback-wrapper');
+        if (!existingFallback) {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'svg-fallback-wrapper w-full h-full flex items-center justify-center';
+          wrapper.appendChild(svgClone);
+          imgElement.parentNode.appendChild(wrapper);
+        }
+      }
+    }
+
+    function formatRupiah(num) {
+      return 'Rp ' + Math.round(Number(num) || 0).toLocaleString('id-ID');
+    }
+
+    // Render Opsi Dropdown Booster Deadline
+    function renderDeadlineOptions() {
+      const select = document.getElementById('clientDeadline');
+      if (!select) return;
+      const currentVal = select.value || 'standar';
+      const fastMult = (Number(appConfig.fastBoosterPct) || 0) / 100;
+      const expMult = (Number(appConfig.expressBoosterPct) || 0) / 100;
+
+      select.innerHTML = `
+        <option value="standar" data-multiplier="0" data-label="Standar / Normal (Sesuai Estimasi Paket)">
+          ⏳ Standar / Normal — Sesuai Estimasi (+Rp 0)
+        </option>
+        <option value="fast" data-multiplier="${fastMult}" data-label="⚡ Fast Track / Prioritas (+${appConfig.fastBoosterPct}% Booster)">
+          ⚡ Fast Track / Prioritas — Lebih Cepat (+${appConfig.fastBoosterPct}% Booster)
+        </option>
+        <option value="express" data-multiplier="${expMult}" data-label="🚀 Super Express / Kebut 1x24 Jam (+${appConfig.expressBoosterPct}% Booster)">
+          🚀 Super Express / Kebut Prioritas Utama (+${appConfig.expressBoosterPct}% Booster)
+        </option>
+      `;
+      select.value = currentVal;
+    }
+
+    function getDeadlineBoosterInfo() {
+      const select = document.getElementById('clientDeadline');
+      if (!select || select.selectedIndex === -1) return { multiplier: 0, label: 'Standar / Normal', code: 'standar' };
+      const selectedOption = select.options[select.selectedIndex];
+      return {
+        code: select.value,
+        multiplier: parseFloat(selectedOption.getAttribute('data-multiplier') || '0'),
+        label: selectedOption.getAttribute('data-label') || selectedOption.text
+      };
+    }
+
+    // Render Tab Kategori berdasarkan paket yang aktif
+    function renderCategoryTabs() {
+      const container = document.getElementById('categoryTabsContainer');
+      const activeServices = appConfig.services.filter(s => s.active !== false);
+      const hasCat = (cat) => activeServices.some(s => s.category === cat);
+
+      const tabs = [
+        { id: 'all', label: 'Semua Layanan', show: true },
+        { id: 'web', label: '💻 Pembuatan Website', show: hasCat('web') },
+        { id: 'bot', label: '🤖 Bot WhatsApp', show: hasCat('bot') },
+        { id: 'editing', label: '🎬 Editing Video & Foto', show: hasCat('editing') },
+        { id: 'desain', label: '🎨 Poster & Desain Grafis', show: hasCat('desain') }
+      ];
+
+      container.innerHTML = tabs.filter(t => t.show).map(t => {
+        const isActive = currentCategory === t.id;
+        const cls = isActive
+          ? 'cat-btn active shrink-0 px-5 py-2.5 rounded-xl text-sm font-bold transition-all bg-gradient-to-r from-blue-600 to-cyan-400 text-slate-950 shadow-lg shadow-cyan-500/25'
+          : 'cat-btn shrink-0 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all bg-slate-900 text-slate-300 hover:text-white border border-slate-800';
+        return `<button onclick="filterCategory('${t.id}')" data-cat="${t.id}" class="${cls}">${t.label}</button>`;
+      }).join('');
+    }
+
+    // Render Katalog Layanan
+    function renderServices() {
+      renderCategoryTabs();
+      const grid = document.getElementById('servicesGrid');
+      const activeServices = appConfig.services.filter(s => s.active !== false);
+      const filtered = currentCategory === 'all'
+        ? activeServices
+        : activeServices.filter(s => s.category === currentCategory);
+
+      grid.innerHTML = filtered.map(item => {
+        const inCart = cart.find(c => c.id === item.id);
+        const qty = inCart ? inCart.qty : 0;
+
+        return `
+          <div class="glass-card rounded-2xl p-6 flex flex-col justify-between transition-all duration-300">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-lg bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+                  <i data-lucide="${item.icon || 'sparkles'}" class="w-3.5 h-3.5"></i>
+                  ${item.categoryLabel}
+                </span>
+                <span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-slate-800/90 text-slate-300 border border-slate-700">
+                  ⏱ ${item.duration}
+                </span>
+              </div>
+
+              <h3 class="font-display font-bold text-xl text-white mb-2">${item.title}</h3>
+              <p class="text-slate-400 text-sm leading-relaxed mb-5">${item.desc}</p>
+
+              <ul class="space-y-2 mb-6 border-t border-slate-800/80 pt-4">
+                ${(item.features || []).map(f => `
+                  <li class="flex items-start gap-2 text-xs text-slate-300">
+                    <i data-lucide="check" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                    <span>${f}</span>
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between gap-4">
+              <div>
+                <span class="block text-[11px] text-slate-400">Harga Paket</span>
+                <span class="font-display font-bold text-xl text-white">${formatRupiah(item.price)}</span>
+              </div>
+
+              ${qty > 0 ? `
+                <div class="flex items-center gap-2 bg-slate-900 border border-cyan-500/40 rounded-xl p-1">
+                  <button onclick="updateQty('${item.id}', -1)" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold flex items-center justify-center">-</button>
+                  <span class="text-sm font-bold text-cyan-300 px-2">${qty}</span>
+                  <button onclick="updateQty('${item.id}', 1)" class="w-8 h-8 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold flex items-center justify-center">+</button>
+                </div>
+              ` : `
+                <button onclick="addToCart('${item.id}')" class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-400 hover:from-blue-500 hover:to-cyan-300 text-slate-950 font-extrabold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition-all shadow-md shadow-cyan-500/15">
+                  <i data-lucide="plus" class="w-4 h-4"></i>
+                  <span>Pilih Paket</span>
+                </button>
+              `}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function filterCategory(cat) {
+      currentCategory = cat;
+      renderServices();
+    }
+
+    function addToCart(serviceId) {
+      const item = appConfig.services.find(s => s.id === serviceId);
+      if (!item) return;
+
+      const existing = cart.find(c => c.id === serviceId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ ...item, qty: 1 });
+      }
+
+      showToast(`"${item.title}" ditambahkan!`);
+      updateCartUI();
+      renderServices();
+    }
+
+    function updateQty(serviceId, delta) {
+      const idx = cart.findIndex(c => c.id === serviceId);
+      if (idx === -1) return;
+
+      cart[idx].qty += delta;
+      if (cart[idx].qty <= 0) {
+        cart.splice(idx, 1);
+      }
+
+      updateCartUI();
+      renderServices();
+    }
+
+    function updateCartUI() {
+      // Sinkronkan harga item di keranjang jika baru diedit admin
+      cart.forEach(c => {
+        const latest = appConfig.services.find(s => s.id === c.id);
+        if (latest) {
+          c.price = latest.price;
+          c.duration = latest.duration;
+          c.title = latest.title;
+        }
+      });
+
+      const totalItems = cart.reduce((sum, i) => sum + i.qty, 0);
+      const subtotalPrice = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+
+      const boosterInfo = getDeadlineBoosterInfo();
+      const boosterFee = Math.round(subtotalPrice * boosterInfo.multiplier);
+      const grandTotal = subtotalPrice + boosterFee;
+
+      document.getElementById('cartCountBadge').textContent = totalItems;
+      document.getElementById('mobileCartCount').textContent = `${totalItems} Item`;
+      document.getElementById('mobileCartTotal').textContent = formatRupiah(grandTotal);
+      document.getElementById('cartSubtotalPrice').textContent = formatRupiah(subtotalPrice);
+      document.getElementById('cartTotalPrice').textContent = formatRupiah(grandTotal);
+
+      const priceBreakdown = document.getElementById('priceBreakdown');
+      const boosterRow = document.getElementById('boosterRow');
+      const boosterLabelText = document.getElementById('boosterLabelText');
+      const cartBoosterPrice = document.getElementById('cartBoosterPrice');
+
+      if (totalItems > 0) {
+        priceBreakdown.classList.remove('hidden');
+        if (boosterFee > 0) {
+          boosterRow.classList.remove('hidden');
+          const pct = Math.round(boosterInfo.multiplier * 100);
+          boosterLabelText.textContent = `⚡ Booster Deadline (+${pct}%)`;
+          cartBoosterPrice.textContent = `+ ${formatRupiah(boosterFee)}`;
+        } else {
+          boosterRow.classList.add('hidden');
+        }
+      } else {
+        priceBreakdown.classList.add('hidden');
+      }
+
+      const floatingBar = document.getElementById('floatingCartBar');
+      if (totalItems > 0) {
+        floatingBar.classList.remove('hidden');
+      } else {
+        floatingBar.classList.add('hidden');
+      }
+
+      const container = document.getElementById('cartItemsContainer');
+      const briefForm = document.getElementById('briefFormSection');
+      const checkoutBtn = document.getElementById('checkoutBtn');
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12 px-4 border border-dashed border-slate-800 rounded-2xl">
+            <i data-lucide="layers" class="w-10 h-10 text-slate-600 mx-auto mb-3"></i>
+            <p class="text-sm font-semibold text-slate-300">Keranjang Proyek Masih Kosong</p>
+            <p class="text-xs text-slate-500 mt-1">Pilih layanan Website, Bot WA, atau Desain Poster untuk memulai.</p>
+          </div>
+        `;
+        briefForm.classList.add('hidden');
+        checkoutBtn.disabled = true;
+      } else {
+        container.innerHTML = cart.map(item => `
+          <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3.5 flex items-center justify-between gap-3">
+            <div class="min-w-0">
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-cyan-400">${item.categoryLabel}</span>
+                <span class="text-[10px] text-slate-400">• ⏱ ${item.duration}</span>
+              </div>
+              <h4 class="text-sm font-bold text-white truncate">${item.title}</h4>
+              <p class="text-xs text-slate-400 mt-0.5">${formatRupiah(item.price)} × ${item.qty}</p>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button onclick="updateQty('${item.id}', -1)" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold">-</button>
+              <span class="text-xs font-bold text-cyan-300 w-5 text-center">${item.qty}</span>
+              <button onclick="updateQty('${item.id}', 1)" class="w-7 h-7 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold">+</button>
+            </div>
+          </div>
+        `).join('');
+        briefForm.classList.remove('hidden');
+        checkoutBtn.disabled = false;
+      }
+
+      lucide.createIcons();
+    }
+
+    function toggleCart(open) {
+      const drawer = document.getElementById('cartDrawer');
+      const backdrop = document.getElementById('cartDrawerBackdrop');
+
+      if (open) {
+        backdrop.classList.remove('hidden');
+        setTimeout(() => backdrop.classList.remove('opacity-0'), 10);
+        drawer.classList.remove('translate-x-full');
+      } else {
+        backdrop.classList.add('opacity-0');
+        drawer.classList.add('translate-x-full');
+        setTimeout(() => backdrop.classList.add('hidden'), 300);
+      }
+    }
+
+    function checkoutWhatsApp() {
+      if (cart.length === 0) return;
+
+      const adminPhone = (appConfig.whatsappNumber || '6282198995676').replace(/[^0-9]/g, '');
+      const clientName = document.getElementById('clientName').value.trim() || 'Klien Veltrix';
+      const clientNotes = document.getElementById('clientNotes').value.trim() || '-';
+
+      const subtotalPrice = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+      const boosterInfo = getDeadlineBoosterInfo();
+      const boosterFee = Math.round(subtotalPrice * boosterInfo.multiplier);
+      const grandTotal = subtotalPrice + boosterFee;
+
+      let message = `⚡ *HALO VELTRIX STUDIO!*\n`;
+      message += `Saya ingin memesan layanan berikut:\n\n`;
+
+      cart.forEach((item, idx) => {
+        message += `*${idx + 1}. ${item.title}* (${item.categoryLabel})\n`;
+        message += `   Estimasi Normal: ${item.duration}\n`;
+        message += `   Jumlah: ${item.qty}x | Subtotal: ${formatRupiah(item.price * item.qty)}\n\n`;
+      });
+
+      message += `----------------------------------\n`;
+      message += `💵 *Subtotal Paket:* ${formatRupiah(subtotalPrice)}\n`;
+      if (boosterFee > 0) {
+        const pct = Math.round(boosterInfo.multiplier * 100);
+        message += `🚀 *Biaya Booster (+${pct}%):* + ${formatRupiah(boosterFee)}\n`;
+      }
+      message += `💰 *Estimasi Total Akhir:* *${formatRupiah(grandTotal)}*\n`;
+      message += `----------------------------------\n`;
+      message += `👤 *Nama Pemesan:* ${clientName}\n`;
+      message += `⏳ *Target Kecepatan:* ${boosterInfo.label}\n`;
+      message += `📝 *Catatan / Konsep:* ${clientNotes}\n`;
+      message += `----------------------------------\n\n`;
+      message += `Mohon info langkah selanjutnya ya, terima kasih! 🙌`;
+
+      const waUrl = `https://wa.me/${adminPhone}?text=${encodeURIComponent(message)}`;
+      window.open(waUrl, '_blank');
+    }
+
+    function openCustomConsult() {
+      const adminPhone = (appConfig.whatsappNumber || '6282198995676').replace(/[^0-9]/g, '');
+      const message = `⚡ Halo *Veltrix Studio*! Saya ingin konsultasi custom untuk pembuatan Website / Bot WA / Desain Grafis. Bisa dibantu?`;
+      window.open(`https://wa.me/${adminPhone}?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    // =========================================================================
+    // LOGIKA PANEL ADMIN & LOGIN
+    // =========================================================================
+    function openAdminAccess() {
+      if (isAdminLoggedIn) {
+        openAdminDashboard();
+      } else {
+        const modal = document.getElementById('adminLoginModal');
+        document.getElementById('adminPinInput').value = '';
+        document.getElementById('loginErrorMsg').classList.add('hidden');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        setTimeout(() => document.getElementById('adminPinInput').focus(), 50);
+      }
+    }
+
+    function closeAdminLogin() {
+      const modal = document.getElementById('adminLoginModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const inputPin = document.getElementById('adminPinInput').value.trim();
+      const validPin = appConfig.adminPin || 'veltrix123';
+
+      if (inputPin === validPin) {
+        isAdminLoggedIn = true;
+        closeAdminLogin();
+        openAdminDashboard();
+      } else {
+        document.getElementById('loginErrorMsg').classList.remove('hidden');
+      }
+    }
+
+    function openAdminDashboard() {
+      renderAdminDashboardInputs();
+      const modal = document.getElementById('adminDashboardModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      lucide.createIcons();
+    }
+
+    function closeAdminDashboard() {
+      const modal = document.getElementById('adminDashboardModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function switchAdminTab(tabName) {
+      ['services', 'settings', 'backup'].forEach(t => {
+        const content = document.getElementById(`adminTab-${t}`);
+        const btn = document.getElementById(`tabBtn-${t}`);
+        if (t === tabName) {
+          content.classList.remove('hidden');
+          btn.className = 'admin-tab-btn shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-cyan-500/15 text-cyan-300 border border-cyan-400/40 transition-all';
+        } else {
+          content.classList.add('hidden');
+          btn.className = 'admin-tab-btn shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900/80 text-slate-400 hover:text-white border border-slate-800 transition-all';
+        }
+      });
+    }
+
+    function renderAdminDashboardInputs() {
+      const list = document.getElementById('adminServicesList');
+      list.innerHTML = appConfig.services.map((srv, idx) => `
+        <div class="bg-slate-900/80 border ${srv.active !== false ? 'border-slate-800' : 'border-slate-800/40 opacity-60'} rounded-2xl p-4 space-y-3 transition-all">
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
+            
+            <div class="sm:col-span-4">
+              <label class="block text-[10px] uppercase tracking-wider text-slate-400 mb-1">Nama Paket Layanan</label>
+              <input type="text" value="${srv.title.replace(/"/g, '&quot;')}" onchange="updateAdminServiceField(${idx}, 'title', this.value)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm font-bold text-white focus:border-cyan-400 focus:outline-none" />
+            </div>
+
+            <div class="sm:col-span-2">
+              <label class="block text-[10px] uppercase tracking-wider text-slate-400 mb-1">Kategori</label>
+              <select onchange="updateAdminServiceCategory(${idx}, this.value)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-2 text-xs text-slate-200 focus:border-cyan-400 focus:outline-none">
+                <option value="web" ${srv.category === 'web' ? 'selected' : ''}>💻 Website</option>
+                <option value="bot" ${srv.category === 'bot' ? 'selected' : ''}>🤖 Bot WA</option>
+                <option value="editing" ${srv.category === 'editing' ? 'selected' : ''}>🎬 Video/Foto</option>
+                <option value="desain" ${srv.category === 'desain' ? 'selected' : ''}>🎨 Desain</option>
+              </select>
+            </div>
+
+            <div class="sm:col-span-2">
+              <label class="block text-[10px] uppercase tracking-wider text-cyan-400 mb-1">Harga (Rp)</label>
+              <input type="number" step="1000" value="${srv.price}" onchange="updateAdminServiceField(${idx}, 'price', Number(this.value))" class="w-full bg-slate-950 border border-cyan-500/30 rounded-xl px-3 py-2 text-xs sm:text-sm font-bold text-cyan-300 focus:border-cyan-400 focus:outline-none" />
+            </div>
+
+            <div class="sm:col-span-2">
+              <label class="block text-[10px] uppercase tracking-wider text-emerald-400 mb-1">Estimasi Waktu</label>
+              <input type="text" value="${srv.duration}" onchange="updateAdminServiceField(${idx}, 'duration', this.value)" class="w-full bg-slate-950 border border-emerald-500/30 rounded-xl px-3 py-2 text-xs sm:text-sm font-semibold text-emerald-300 focus:border-emerald-400 focus:outline-none" />
+            </div>
+
+            <div class="sm:col-span-2 flex items-center justify-end gap-2 pt-3 sm:pt-4">
+              <button onclick="toggleServiceActive(${idx})" class="px-3 py-2 rounded-xl text-xs font-bold border transition-all ${srv.active !== false ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30' : 'bg-slate-800 text-slate-400 border-slate-700'}">
+                ${srv.active !== false ? '● Aktif' : '○ Nonaktif'}
+              </button>
+              <button onclick="deleteServiceRow(${idx})" title="Hapus Paket" class="p-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20">
+                <i data-lucide="trash-2" class="w-4 h-4"></i>
+              </button>
+            </div>
+
+          </div>
+          <div>
+            <input type="text" value="${srv.desc.replace(/"/g, '&quot;')}" onchange="updateAdminServiceField(${idx}, 'desc', this.value)" placeholder="Deskripsi singkat paket..." class="w-full bg-slate-950/60 border border-slate-800/80 rounded-lg px-3 py-1.5 text-xs text-slate-400 focus:text-white focus:border-cyan-400 focus:outline-none" />
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('settingFastPct').value = appConfig.fastBoosterPct;
+      document.getElementById('settingExpressPct').value = appConfig.expressBoosterPct;
+      document.getElementById('settingWhatsapp').value = appConfig.whatsappNumber;
+      document.getElementById('settingAdminPin').value = appConfig.adminPin;
+
+      lucide.createIcons();
+    }
+
+    function updateAdminServiceField(index, field, value) {
+      if (appConfig.services[index]) {
+        appConfig.services[index][field] = value;
+      }
+    }
+
+    function updateAdminServiceCategory(index, catValue) {
+      const labelMap = {
+        web: 'Website',
+        bot: 'Bot WA',
+        editing: 'Video & Foto',
+        desain: 'Desain Grafis'
+      };
+      if (appConfig.services[index]) {
+        appConfig.services[index].category = catValue;
+        appConfig.services[index].categoryLabel = labelMap[catValue] || 'Layanan';
+      }
+    }
+
+    function toggleServiceActive(index) {
+      if (appConfig.services[index]) {
+        appConfig.services[index].active = appConfig.services[index].active === false ? true : false;
+        renderAdminDashboardInputs();
+      }
+    }
+
+    function deleteServiceRow(index) {
+      appConfig.services.splice(index, 1);
+      renderAdminDashboardInputs();
+    }
+
+    function addNewServiceRow() {
+      appConfig.services.unshift({
+        id: 'srv-' + Date.now(),
+        active: true,
+        category: 'web',
+        categoryLabel: 'Website',
+        title: 'Paket Layanan Baru Veltrix',
+        price: 100000,
+        duration: '1 - 2 Hari',
+        icon: 'sparkles',
+        desc: 'Deskripsi layanan baru Veltrix Studio.',
+        features: ['Kualitas Terbaik & Modern', 'Garansi Revisi', 'Konsultasi via WhatsApp']
+      });
+      renderAdminDashboardInputs();
+    }
+
+    function saveAdminChanges() {
+      appConfig.fastBoosterPct = Number(document.getElementById('settingFastPct').value) || 0;
+      appConfig.expressBoosterPct = Number(document.getElementById('settingExpressPct').value) || 0;
+      appConfig.whatsappNumber = document.getElementById('settingWhatsapp').value.trim() || '6282198995676';
+      appConfig.adminPin = document.getElementById('settingAdminPin').value.trim() || 'veltrix123';
+
+      saveConfigToLocal();
+      renderDeadlineOptions();
+      renderServices();
+      updateCartUI();
+      closeAdminDashboard();
+      showToast('Perubahan harga & estimasi berhasil disimpan!');
+    }
+
+    function resetToDefaultData() {
+      appConfig = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+      saveConfigToLocal();
+      renderAdminDashboardInputs();
+      renderDeadlineOptions();
+      renderServices();
+      updateCartUI();
+      showToast('Data berhasil dikembalikan ke pengaturan awal!');
+    }
+
+    function downloadUpdatedHtmlFile() {
+      // Simpan dulu perubahan terbaru dari form
+      appConfig.fastBoosterPct = Number(document.getElementById('settingFastPct').value) || 0;
+      appConfig.expressBoosterPct = Number(document.getElementById('settingExpressPct').value) || 0;
+      appConfig.whatsappNumber = document.getElementById('settingWhatsapp').value.trim() || '6282198995676';
+      appConfig.adminPin = document.getElementById('settingAdminPin').value.trim() || 'veltrix123';
+
+      let fullHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+      const newDefaultStr = 'const DEFAULT_CONFIG = ' + JSON.stringify(appConfig, null, 6) + ';';
+      fullHtml = fullHtml.replace(/const DEFAULT_CONFIG = [\s\S]*?;\n\s*let appConfig/, newDefaultStr + '\n\n    let appConfig');
+
+      const blob = new Blob([fullHtml], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'index.html';
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('File index.html terbaru berhasil diunduh!');
+    }
+
+    // Shortcut Keyboard Rahasia Admin: Ctrl + Shift + A
+    window.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+        e.preventDefault();
+        openAdminAccess();
+      }
+    });
+
+    // Toast Notification
+    let toastTimeout;
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMsg').textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2500);
+    }
+
+    // Init
+    window.addEventListener('DOMContentLoaded', () => {
+      renderDeadlineOptions();
+      renderServices();
+      updateCartUI();
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
